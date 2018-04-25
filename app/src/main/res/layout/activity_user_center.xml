@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rl_center"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="150dp"-->
+                <!--android:background="@color/gray"-->
+                <!--android:transitionName="share_layout">-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_bg"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="150dp"-->
+                    <!--android:src="@color/gray"/>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:background="@color/background">-->
+                    <!--<ImageView-->
+                        <!--android:id="@+id/iv_user_img"-->
+                        <!--android:layout_width="50dp"-->
+                        <!--android:layout_height="50dp"-->
+                        <!--android:layout_gravity="center_horizontal"-->
+                        <!--android:src="@drawable/circle_shape"/>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_user_name"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="name"-->
+                        <!--android:gravity="center_horizontal"-->
+                        <!--android:textSize="@dimen/text_waybill_detail_20"-->
+                        <!--android:textColor="@color/white"/>-->
+                <!--</LinearLayout>-->
+            <!--</RelativeLayout>-->
+            <include layout="@layout/nav_header_main"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/user_tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:layout_collapseMode="pin"
+                android:contentInsetLeft="0dp"
+                app:navigationIcon="@mipmap/nav_btn_back_android"
+                >
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="main"
+                    android:layout_marginLeft="100dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_waybill_detail_20"/>
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        ></android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
