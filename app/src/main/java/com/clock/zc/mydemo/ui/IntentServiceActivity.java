@@ -16,7 +16,8 @@ import android.widget.TextView;
 
 import com.clock.zc.mydemo.R;
 
-import static com.clock.zc.mydemo.ui.MyIntentService.EXTRA_IMG_PATH;
+import static com.clock.zc.mydemo.ui.TestIntentService.EXTRA_IMG_PATH;
+
 
 public class IntentServiceActivity extends AppCompatActivity {
     public static final String UPLOAD_RESULT = "com.zhy.blogcodes.intentservice.UPLOAD_RESULT";
@@ -119,8 +120,8 @@ public class IntentServiceActivity extends AppCompatActivity {
 
     public static void startUploadImg(Context context, String path)
     {
-        Intent intent = new Intent(context, MyIntentService.class);
-        intent.setAction(MyIntentService.ACTION_UPLOAD_IMG);
+        Intent intent = new Intent(context, TestIntentService.class);
+        intent.setAction(TestIntentService.ACTION_UPLOAD_IMG);
         intent.putExtra(EXTRA_IMG_PATH, path);
         context.startService(intent);
     }

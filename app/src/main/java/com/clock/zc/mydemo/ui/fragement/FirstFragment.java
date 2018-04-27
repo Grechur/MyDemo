@@ -33,7 +33,7 @@ import butterknife.Unbinder;
 
 @SuppressLint("ValidFragment")
 public class FirstFragment extends Fragment {
-    private String context;
+    private String context = "";
     @BindView(R.id.txt_content)
     TextView mTextView;
     @BindView(R.id.btn_rx_down)
@@ -50,6 +50,8 @@ public class FirstFragment extends Fragment {
     private DownLoadManager manager;
 
     private Unbinder unbinder;
+    public  FirstFragment(){
+    }
     public  FirstFragment(String context){
         this.context = context;
     }

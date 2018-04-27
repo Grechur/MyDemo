@@ -25,6 +25,9 @@ public class AdaFragment extends Fragment {
     @BindView(R.id.txt_content)
     TextView mTextView;
     private Unbinder unbinder;
+    public AdaFragment(){
+        this.context = "";
+    }
     public AdaFragment(String context){
         this.context = context;
     }

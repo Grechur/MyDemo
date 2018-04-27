@@ -150,9 +150,9 @@ public class MainActivity extends BaseActivity {
 //                        bindService(intent,connection,BIND_AUTO_CREATE);
 //                    }
 //                }.start();
-//                Intent intent = new Intent();
-//                intent.setClass(MainActivity.this,IntentServiceActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,IntentServiceActivity.class);
+                startActivity(intent);
                 //如果与服务端的连接处于未连接状态，则尝试连接
 //                if (!mBound) {
 //                    attemptToBindService();
@@ -170,8 +170,8 @@ public class MainActivity extends BaseActivity {
 //                } catch (RemoteException e) {
 //                    e.printStackTrace();
 //                }
-                Intent intent = new Intent(MainActivity.this, TargetActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, TargetActivity.class);
+//                startActivity(intent);
 
             }
         });

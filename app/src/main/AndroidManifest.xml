@@ -26,16 +26,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.PresentActivity" />
-        <activity android:name=".ui.UserCenterActivity" />
-        <activity android:name=".ui.ProxyActivity" />
+        <activity android:name=".ui.PresentActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".ui.UserCenterActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity android:name=".ui.ProxyActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
 
         <service
             android:name=".ui.MyService"
@@ -50,8 +54,11 @@
         <service
             android:name=".ui.MyIntentService"
             android:exported="false" />
-
+        <!--<service-->
+            <!--android:name=".ui.TestIntentService"-->
+            <!--android:exported="false" />-->
         <activity android:name=".ui.IntentServiceActivity" />
+
     </application>
 
 </manifest>

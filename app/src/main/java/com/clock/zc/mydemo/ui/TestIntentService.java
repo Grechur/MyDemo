@@ -2,7 +2,6 @@ package com.clock.zc.mydemo.ui;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -15,7 +14,7 @@ import com.clock.zc.mydemo.utils.proxyact.ServiceManager;
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
-public class MyIntentService extends IntentService {
+public class TestIntentService extends IntentService {
 
     public static final String ACTION_UPLOAD_IMG = "com.zhy.blogcodes.intentservice.action.UPLOAD_IMAGE";
     public static final String EXTRA_IMG_PATH = "com.zhy.blogcodes.intentservice.extra.IMG_PATH";
@@ -23,15 +22,14 @@ public class MyIntentService extends IntentService {
 
 
 
-    public MyIntentService()
+    public TestIntentService()
     {
         super("UploadImgService");
     }
 
     @Override
     public void onStart(@Nullable Intent intent, int startId) {
-        // 分发Service
-        ServiceManager.getInstance().onStart(intent, startId);
+
         super.onStart(intent, startId);
     }
 

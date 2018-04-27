@@ -18,11 +18,9 @@ import static java.lang.reflect.Proxy.newProxyInstance;
  */
 
 public class HookUtil {
-    private Class<? extends Activity> proxyActivity;
     private Context context;
 
-    public HookUtil(Class<? extends Activity> proxyActivity, Context context) {
-        this.proxyActivity = proxyActivity;
+    public HookUtil(Context context) {
         this.context = context;
     }
 
@@ -43,7 +41,7 @@ public class HookUtil {
             //开始动态代理，用代理对象替换掉真实的ActivityManager，瞒天过海
             Class IActivityManagerIntercept = Class.forName("android.app.IActivityManager");
 
-            AmsInvocationHandler handler = new AmsInvocationHandler(iActivityManagerObject,context,proxyActivity);
+            AmsInvocationHandler handler = new AmsInvocationHandler(iActivityManagerObject,context);
             Object proxy = newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class<?>[]{IActivityManagerIntercept}, handler);
             //现在替换掉这个对象
             mInstance.set(defaultValue, proxy);
@@ -63,7 +61,7 @@ public class HookUtil {
 
             Method getPackageManager = activityThread.getClass().getDeclaredMethod("getPackageManager");
             Object iPackageManager = getPackageManager.invoke(activityThread);
-            PackageManagerHandler phandler = new PackageManagerHandler(iPackageManager,context,proxyActivity);
+            PackageManagerHandler phandler = new PackageManagerHandler(iPackageManager,context);
             Class<?> iPackageManagerIntercept = Class.forName("android.content.pm.IPackageManager");
             Object proxy = newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class<?>[]{iPackageManagerIntercept}, phandler);
             // 获取 sPackageManager 属性
