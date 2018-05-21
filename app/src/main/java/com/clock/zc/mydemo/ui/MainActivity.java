@@ -1,5 +1,6 @@
 package com.clock.zc.mydemo.ui;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -43,6 +44,8 @@ import com.clock.zc.mydemo.view.TransitionHelper;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.model.PluginInfo;
 import com.qihoo360.replugin.utils.FileUtils;
+import com.tbruyelle.rxpermissions2.Permission;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -56,6 +59,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hugo.weaving.DebugLog;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import okhttp3.MultipartBody;
+import okhttp3.internal.cache.CacheInterceptor;
+import okhttp3.internal.connection.RealConnection;
+import okhttp3.internal.http.BridgeInterceptor;
+import okhttp3.internal.http.CallServerInterceptor;
 
 import static com.clock.zc.mydemo.R.id.fragment_container;
 
@@ -173,16 +184,39 @@ public class MainActivity extends BaseActivity {
 //                } catch (RemoteException e) {
 //                    e.printStackTrace();
 //                }
-                Intent intent = new Intent(MainActivity.this, TargetActivity.class);
+//                Intent intent = new Intent(MainActivity.this, TargetActivity.class);
+//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, WaterMarkActivity.class);
                 startActivity(intent);
 
             }
         });
+
+        RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+
+                    }
+                });
+        rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA)
+                .subscribe(new Consumer<Permission>() {
+                    @Override
+                    public void accept(Permission permission) throws Exception {
+
+                    }
+                });
     }
 
     private void attemptToBindService() {
         Intent intent = new Intent(MainActivity.this,MyService.class);
         bindService(intent,connection,BIND_AUTO_CREATE);
+
     }
 
     //    private Messenger messenger;

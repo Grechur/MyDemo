@@ -12,7 +12,9 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
     <!-- Tell the system this app requires OpenGL ES 2.0. -->
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -26,7 +28,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity"
+        <activity
+            android:name=".ui.MainActivity"
             android:configChanges="screenSize|keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,31 +37,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.PresentActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
-        <activity android:name=".ui.UserCenterActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
-        <activity android:name=".ui.ProxyActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"/>
+        <activity
+            android:name=".ui.PresentActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+        <activity
+            android:name=".ui.UserCenterActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
+        <activity
+            android:name=".ui.ProxyActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation" />
 
         <service
             android:name=".ui.MyService"
             android:enabled="true"
             android:exported="true"
-            android:process=":mote" >
+            android:process=":mote">
             <intent-filter>
-                <action android:name="com.lypeer.aidl"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.lypeer.aidl" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
         <service
             android:name=".ui.MyIntentService"
             android:exported="false" />
-        <!--<service-->
-            <!--android:name=".ui.TestIntentService"-->
-            <!--android:exported="false" />-->
+        <!-- <service -->
+        <!-- android:name=".ui.TestIntentService" -->
+        <!-- android:exported="false" /> -->
         <activity android:name=".ui.IntentServiceActivity" />
-
+        <activity android:name=".ui.WaterMarkActivity"></activity>
     </application>
 
 </manifest>
