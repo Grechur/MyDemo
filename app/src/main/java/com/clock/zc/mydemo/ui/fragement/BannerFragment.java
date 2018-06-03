@@ -18,9 +18,6 @@ import android.widget.Toast;
 
 import com.clock.zc.mydemo.R;
 import com.clock.zc.mydemo.adapter.ZoomRecycleAdapter;
-import com.qihoo360.replugin.RePlugin;
-import com.qihoo360.replugin.model.PluginInfo;
-import com.qihoo360.replugin.utils.FileUtils;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;

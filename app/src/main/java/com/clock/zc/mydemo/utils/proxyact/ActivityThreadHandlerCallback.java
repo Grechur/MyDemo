@@ -1,12 +1,12 @@
 package com.clock.zc.mydemo.utils.proxyact;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.clock.zc.mydemo.ui.TestIntentService;
 
 import java.lang.reflect.Field;
 
@@ -15,14 +15,16 @@ import java.lang.reflect.Field;
  */
 
 public class ActivityThreadHandlerCallback implements Handler.Callback{
+    public static final String TAG ="ActivityThreadHandlerCallback";
     private Handler handler;
     public ActivityThreadHandlerCallback(Handler handler) {
         this.handler = handler;
     }
+    @SuppressLint("LongLogTag")
     @Override
     public boolean handleMessage(Message msg) {
-        Log.e("HookAmsUtil", "handleMessage");
-        Log.e("HookAmsUtil", "what:"+msg.what);
+        Log.e(TAG, "handleMessage");
+        Log.e(TAG, "what:"+msg.what);
         //替换之前的Intent
         if (msg.what ==100) {
             Log.i("HookAmsUtil","lauchActivity");
@@ -51,3 +53,5 @@ public class ActivityThreadHandlerCallback implements Handler.Callback{
 
     }
 }
+
+

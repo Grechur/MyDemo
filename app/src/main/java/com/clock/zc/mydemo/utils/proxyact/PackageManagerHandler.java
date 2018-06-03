@@ -29,8 +29,15 @@ public class PackageManagerHandler  implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Log.e(TAG,"进入拦截package:"+method.getName());
         if("getActivityInfo".equals(method.getName())){
-            ComponentName proComponentName = new ComponentName(mContext, proxyActivity);
-            args[0] = proComponentName;
+            for (int i = 0; i < args.length; i++) {
+                if(args[i] instanceof ComponentName){
+                    if(args[i]!=null){
+                        ComponentName proComponentName = new ComponentName(mContext, proxyActivity);
+                        args[i] = proComponentName;
+                    }
+                }
+            }
+
         }
         return method.invoke(iPackageManager,args);
     }

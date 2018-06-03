@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -52,12 +53,15 @@ public class AmsInvocationHandler implements InvocationHandler{
                 }
             }
 
-            //伪造一个代理的Intent，代理Intent启动的是proxyActivity
-            Intent proxyIntent = new Intent();
-            ComponentName componentName = new ComponentName(context, proxyActivity);
-            proxyIntent.setComponent(componentName);
-            proxyIntent.putExtra("oldIntent", intent);
-            args[index] = proxyIntent;
+            ComponentName oldComp = intent.getComponent();
+            if(oldComp!=null){
+                //伪造一个代理的Intent，代理Intent启动的是proxyActivity
+                Intent proxyIntent = new Intent();
+                ComponentName componentName = new ComponentName(context, proxyActivity);
+                proxyIntent.setComponent(componentName);
+                proxyIntent.putExtra("oldIntent", intent);
+                args[index] = proxyIntent;
+            }
         }
         if ("stopService".equals(method.getName())) {
             Intent raw = null;
@@ -80,3 +84,4 @@ public class AmsInvocationHandler implements InvocationHandler{
         return method.invoke(iActivityManagerObject, args);
     }
 }
+
