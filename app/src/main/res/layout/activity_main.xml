@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tool_bar"
-        tools:openDrawer="start">
+        tools:openDrawer="start"
+
+        >
     <include
         layout="@layout/activity_main_right"
         android:layout_width="match_parent"

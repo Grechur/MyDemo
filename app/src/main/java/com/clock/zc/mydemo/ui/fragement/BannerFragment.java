@@ -84,6 +84,7 @@ public class BannerFragment  extends Fragment {
         mRecyclerView.setAdapter(mAdapter = new ZoomRecycleAdapter(getActivity(), (ArrayList<String>) mDatas,headerView));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
                 DividerItemDecoration.VERTICAL));
+
         return view;
     }
     public static class BannerViewHolder implements MZViewHolder<Integer> {
