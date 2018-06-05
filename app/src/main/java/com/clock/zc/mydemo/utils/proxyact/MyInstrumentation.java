@@ -56,7 +56,7 @@ public class MyInstrumentation extends Instrumentation {
                 Method addAssetPathMethod = assetManager.getClass().getDeclaredMethod("addAssetPath", String.class);
                 addAssetPathMethod.setAccessible(true);
 
-                addAssetPathMethod.invoke(assetManager, mPath);
+//                addAssetPathMethod.invoke(assetManager, mPath);
                 addAssetPathMethod.invoke(assetManager, apkPath);
 
 

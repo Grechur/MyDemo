@@ -22,12 +22,10 @@ import java.lang.reflect.Method;
 public class AmsInvocationHandler implements InvocationHandler{
     public static final String TAG = "AmsInvocationHandler";
     private Object iActivityManagerObject;
-    private Context context;
     private Class<?> proxyActivity;
 
-    public AmsInvocationHandler(Object iActivityManagerObject, Context context) {
+    public AmsInvocationHandler(Object iActivityManagerObject) {
         this.iActivityManagerObject = iActivityManagerObject;
-        this.context = context;
     }
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -57,7 +55,7 @@ public class AmsInvocationHandler implements InvocationHandler{
             if(oldComp!=null){
                 //伪造一个代理的Intent，代理Intent启动的是proxyActivity
                 Intent proxyIntent = new Intent();
-                ComponentName componentName = new ComponentName(context, proxyActivity);
+                ComponentName componentName = new ComponentName(DemoApplication.getContext().getPackageName(), proxyActivity.getName());
                 proxyIntent.setComponent(componentName);
                 proxyIntent.putExtra("oldIntent", intent);
                 args[index] = proxyIntent;

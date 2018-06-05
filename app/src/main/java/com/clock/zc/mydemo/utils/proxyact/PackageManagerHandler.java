@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.util.Log;
 
+import com.clock.zc.mydemo.base.DemoApplication;
 import com.clock.zc.mydemo.ui.ProxyActivity;
 
 import java.lang.reflect.InvocationHandler;
@@ -17,11 +18,9 @@ import java.lang.reflect.Method;
 public class PackageManagerHandler  implements InvocationHandler {
     public static final String TAG = "PackageManagerHandler";
     private Object iPackageManager;
-    private Context mContext;
     private Class<?> proxyActivity;
-    public PackageManagerHandler(Object iPackageManager, Context context){
+    public PackageManagerHandler(Object iPackageManager){
         this.iPackageManager = iPackageManager;
-        this.mContext = context;
         proxyActivity = ProxyActivity.class;
     }
 
@@ -32,7 +31,7 @@ public class PackageManagerHandler  implements InvocationHandler {
             for (int i = 0; i < args.length; i++) {
                 if(args[i] instanceof ComponentName){
                     if(args[i]!=null){
-                        ComponentName proComponentName = new ComponentName(mContext, proxyActivity);
+                        ComponentName proComponentName = new ComponentName(DemoApplication.getContext().getPackageName(), proxyActivity.getName());
                         args[i] = proComponentName;
                     }
                 }
