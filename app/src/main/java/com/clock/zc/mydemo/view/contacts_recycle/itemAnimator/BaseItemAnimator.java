@@ -21,7 +21,6 @@ package com.clock.zc.mydemo.view.contacts_recycle.itemAnimator;
 
 
 import android.annotation.SuppressLint;
-import android.support.v4.animation.AnimatorCompatHelper;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
@@ -497,8 +496,8 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
 
     @SuppressLint("RestrictedApi")
     private void resetAnimation(RecyclerView.ViewHolder holder) {
-        AnimatorCompatHelper.clearInterpolator(holder.itemView);
-        endAnimation(holder);
+//        AnimatorCompatHelper.clearInterpolator(holder.itemView);
+//        endAnimation(holder);
     }
 
     @Override

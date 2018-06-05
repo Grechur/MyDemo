@@ -1,8 +1,11 @@
 package com.clock.zc.mydemo.utils.proxyact;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
+import android.util.Log;
 
 import com.clock.zc.mydemo.utils.proxyact.ActivityThreadHandlerCallback;
 import com.clock.zc.mydemo.utils.proxyact.AmsInvocationHandler;
@@ -24,13 +27,23 @@ public class HookUtil {
         this.context = context;
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     public void hookAms(){
         //一路反射，直到拿到IActivityManager的对象
         try{
-            Class ActivityManagerNativeClass = Class.forName("android.app.ActivityManagerNative");
-            Field defaultFiled = ActivityManagerNativeClass.getDeclaredField("gDefault");//获取私有方法
-            defaultFiled.setAccessible(true);//解除私有限定
-            Object defaultValue = defaultFiled.get(null);
+            Object defaultValue = null;
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                Class ActivityManagerClass = Class.forName("android.app.ActivityManager");
+                Field defaultFiled = ActivityManagerClass.getDeclaredField("IActivityManagerSingleton");//获取属性
+                defaultFiled.setAccessible(true);//解除私有限定
+                defaultValue = defaultFiled.get(null);
+            }else{
+                Class ActivityManagerNativeClass = Class.forName("android.app.ActivityManagerNative");
+                Field defaultFiled = ActivityManagerNativeClass.getDeclaredField("gDefault");//获取私有方法
+                defaultFiled.setAccessible(true);//解除私有限定
+                defaultValue = defaultFiled.get(null);
+            }
+
             //反射SingleTon
             Class SingletonClass = Class.forName("android.util.Singleton");
             Field mInstance = SingletonClass.getDeclaredField("mInstance");
@@ -47,6 +60,7 @@ public class HookUtil {
             mInstance.set(defaultValue, proxy);
         }catch (Exception e){
             e.printStackTrace();
+            Log.e("错误：",e.getMessage());
         }
     }
 

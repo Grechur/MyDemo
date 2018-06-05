@@ -38,12 +38,13 @@ import com.clock.zc.mydemo.bean.User;
 import com.clock.zc.mydemo.ui.fragement.BannerFragment;
 import com.clock.zc.mydemo.ui.fragement.FirstFragment;
 import com.clock.zc.mydemo.ui.fragement.TableFragment;
+import com.clock.zc.mydemo.utils.proxyact.MyHookHelper;
 import com.clock.zc.mydemo.view.QQNaviView;
 import com.clock.zc.mydemo.view.TransitionHelper;
 
-import com.qihoo360.replugin.RePlugin;
-import com.qihoo360.replugin.model.PluginInfo;
-import com.qihoo360.replugin.utils.FileUtils;
+//import com.qihoo360.replugin.RePlugin;
+//import com.qihoo360.replugin.model.PluginInfo;
+//import com.qihoo360.replugin.utils.FileUtils;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -58,7 +59,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import hugo.weaving.DebugLog;
+import dalvik.system.DexClassLoader;
+//import hugo.weaving.DebugLog;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -186,9 +188,13 @@ public class MainActivity extends BaseActivity {
 //                }
 //                Intent intent = new Intent(MainActivity.this, TargetActivity.class);
 //                startActivity(intent);
-                Intent intent = new Intent(MainActivity.this, WaterMarkActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, WaterMarkActivity.class);
+//                startActivity(intent);
 
+                Intent intent = new Intent();
+                intent.setComponent(new ComponentName("com.example.zhouzhu.testhook",
+                        "com.example.zhouzhu.testhook.MainActivity"));
+                startActivity(intent);
             }
         });
 
@@ -202,17 +208,42 @@ public class MainActivity extends BaseActivity {
 
                     }
                 });
-        rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA)
-                .subscribe(new Consumer<Permission>() {
-                    @Override
-                    public void accept(Permission permission) throws Exception {
-
-                    }
-                });
+//        rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                Manifest.permission.CAMERA)
+//                .subscribe(new Consumer<Permission>() {
+//                    @Override
+//                    public void accept(Permission permission) throws Exception {
+//
+//                    }
+//                });
     }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+        try {
+            new Thread(){
+                @Override
+                public void run() {
+                    //创建一个属于我们自己插件的ClassLoader，我们分析过只能使用DexClassLoader
+                    String cachePath = MainActivity.this.getCacheDir().getAbsolutePath();
+                    String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.apk";
+                    DexClassLoader mClassLoader = new DexClassLoader(apkPath, cachePath,cachePath, getClassLoader());
+                    MyHookHelper.inject(mClassLoader);
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this,"加载完成",Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+            }.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private void attemptToBindService() {
         Intent intent = new Intent(MainActivity.this,MyService.class);
         bindService(intent,connection,BIND_AUTO_CREATE);
@@ -311,35 +342,35 @@ public class MainActivity extends BaseActivity {
 //        }
 //    }
 
-    @OnClick(R.id.title)
-    void down(View v){
-        Toast.makeText(MainActivity.this, "", Toast.LENGTH_LONG).show();
-        String demo3Apk = "clock.apk";
-        String demo3apkPath = Environment.getExternalStorageDirectory() + File.separator + demo3Apk;
-        File pluginFile = new File(demo3apkPath);
-        if(pluginFile.exists()){
-            String pluginFilePath = getFilesDir().getAbsolutePath() + File.separator + demo3Apk;
-            File newpluginFile = new File(pluginFilePath);
-            if(newpluginFile.exists()){
-                FileUtils.deleteQuietly(newpluginFile);
-            }
-            // 开始复制
-            copyFileToAppFiles(pluginFile, demo3Apk);
-            PluginInfo info = null;
-            if (newpluginFile.exists()) {
-                info = RePlugin.install(pluginFilePath);
-            }
-
-            if (info != null) {
-                RePlugin.startActivity(MainActivity.this, RePlugin.createIntent(info.getName(), "com.clock.zc.punchtheclock.ui.MainActivity"));
-            } else {
-                Toast.makeText(MainActivity.this, "install external plugin failed", Toast.LENGTH_SHORT).show();
-            }
-        }else{
-            toast("插件没下载成功");
-        }
-
-    }
+//    @OnClick(R.id.title)
+//    void down(View v){
+//        Toast.makeText(MainActivity.this, "", Toast.LENGTH_LONG).show();
+//        String demo3Apk = "clock.apk";
+//        String demo3apkPath = Environment.getExternalStorageDirectory() + File.separator + demo3Apk;
+//        File pluginFile = new File(demo3apkPath);
+//        if(pluginFile.exists()){
+//            String pluginFilePath = getFilesDir().getAbsolutePath() + File.separator + demo3Apk;
+//            File newpluginFile = new File(pluginFilePath);
+//            if(newpluginFile.exists()){
+//                FileUtils.deleteQuietly(newpluginFile);
+//            }
+//            // 开始复制
+//            copyFileToAppFiles(pluginFile, demo3Apk);
+//            PluginInfo info = null;
+//            if (newpluginFile.exists()) {
+//                info = RePlugin.install(pluginFilePath);
+//            }
+//
+//            if (info != null) {
+//                RePlugin.startActivity(MainActivity.this, RePlugin.createIntent(info.getName(), "com.clock.zc.punchtheclock.ui.MainActivity"));
+//            } else {
+//                Toast.makeText(MainActivity.this, "install external plugin failed", Toast.LENGTH_SHORT).show();
+//            }
+//        }else{
+//            toast("插件没下载成功");
+//        }
+//
+//    }
     /**
      * 复制某文件内容
      *  @param  fileName 的Apk源文件路径
