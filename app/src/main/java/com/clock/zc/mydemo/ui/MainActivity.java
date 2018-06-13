@@ -103,7 +103,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, tool_bar, 0, 0);
         drawerToggle.syncState();
         drawer_layout.addDrawerListener(drawerToggle);
