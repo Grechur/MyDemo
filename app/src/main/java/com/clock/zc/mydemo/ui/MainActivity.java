@@ -230,7 +230,7 @@ public class MainActivity extends BaseActivity {
                     String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.apk";
                     DexClassLoader mClassLoader = new DexClassLoader(apkPath, cachePath,cachePath, getClassLoader());
                     MyHookHelper.inject(mClassLoader);
-
+                    MyHookHelper.hookActivityResource(MainActivity.this);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
