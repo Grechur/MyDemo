@@ -1,2 +1,2 @@
 
-include ':app', ':designpattern'
+include ':app', ':designpattern', ':testhook'

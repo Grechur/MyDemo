@@ -1,6 +1,7 @@
 package com.clock.zc.mydemo.ui;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -38,6 +39,7 @@ import com.clock.zc.mydemo.bean.User;
 import com.clock.zc.mydemo.ui.fragement.BannerFragment;
 import com.clock.zc.mydemo.ui.fragement.FirstFragment;
 import com.clock.zc.mydemo.ui.fragement.TableFragment;
+import com.clock.zc.mydemo.utils.proxyact.HookUtil;
 import com.clock.zc.mydemo.utils.proxyact.MyHookHelper;
 import com.clock.zc.mydemo.view.QQNaviView;
 import com.clock.zc.mydemo.view.TransitionHelper;
@@ -102,7 +104,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, tool_bar, 0, 0);
         drawerToggle.syncState();
         drawer_layout.addDrawerListener(drawerToggle);
@@ -192,8 +193,10 @@ public class MainActivity extends BaseActivity {
 //                startActivity(intent);
 
                 Intent intent = new Intent();
-                intent.setComponent(new ComponentName("com.example.zhouzhu.testhook",
-                        "com.example.zhouzhu.testhook.MainActivity"));
+//                intent.setComponent(new ComponentName("com.grechur.testhook",
+//                        "com.grechur.testhook.MainActivity"));
+                intent.setComponent(new ComponentName("com.huanju.chajiandemo",
+                        "com.huanju.chajiandemo.TestActivity"));
                 startActivity(intent);
             }
         });
@@ -223,14 +226,18 @@ public class MainActivity extends BaseActivity {
         super.attachBaseContext(newBase);
         try {
             new Thread(){
+                @TargetApi(Build.VERSION_CODES.CUPCAKE)
                 @Override
                 public void run() {
                     //创建一个属于我们自己插件的ClassLoader，我们分析过只能使用DexClassLoader
                     String cachePath = MainActivity.this.getCacheDir().getAbsolutePath();
-                    String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/test.apk";
+                    String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/chajian_demo.apk";
                     DexClassLoader mClassLoader = new DexClassLoader(apkPath, cachePath,cachePath, getClassLoader());
                     MyHookHelper.inject(mClassLoader);
                     MyHookHelper.hookActivityResource(MainActivity.this);
+                    HookUtil hookAmsUtil = new HookUtil();
+                    hookAmsUtil.hookSystemHandler();
+                    hookAmsUtil.hookAms();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
