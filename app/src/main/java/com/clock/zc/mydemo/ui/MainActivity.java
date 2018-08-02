@@ -1,6 +1,7 @@
 package com.clock.zc.mydemo.ui;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -226,6 +227,7 @@ public class MainActivity extends BaseActivity {
         super.attachBaseContext(newBase);
         try {
             new Thread(){
+                @TargetApi(Build.VERSION_CODES.CUPCAKE)
                 @Override
                 public void run() {
                     //创建一个属于我们自己插件的ClassLoader，我们分析过只能使用DexClassLoader
@@ -233,6 +235,7 @@ public class MainActivity extends BaseActivity {
                     String apkPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/chajian_demo.apk";
                     DexClassLoader mClassLoader = new DexClassLoader(apkPath, cachePath,cachePath, getClassLoader());
                     MyHookHelper.inject(mClassLoader);
+                    MyHookHelper.hookActivityResource(MainActivity.this);
                     HookUtil hookAmsUtil = new HookUtil();
                     hookAmsUtil.hookSystemHandler();
                     hookAmsUtil.hookAms();
