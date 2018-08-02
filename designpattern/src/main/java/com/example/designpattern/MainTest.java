@@ -82,28 +82,29 @@ public class MainTest {
 //            System.out.println("这是第"+i+"个"+stack.pop());
 //
 //        }
-        int[] numbers = {1,2,3,5,7,9,10,11};
-        List<Stack<Integer>> list = new ArrayList<>();
-        Stack<Integer> q = new Stack<>();
-        list.add(q);
-        for (int n:numbers) {
-            if(q.size()==0){
-                q.push(n);
-            }else{
-                if(n-1 != list.get(list.size()-1).peek()){
-                    Stack<Integer> q1 = new Stack();
-                    q1.push(n);
-                    list.add(q1);
-                }else{
-                    list.get(list.size()-1).push(n);
-                }
-            }
-        }
-        for (Stack<Integer> s:list) {
-            System.out.println("-----------------");
-            for (Integer i:s){
-                System.out.print(" "+i);
-            }
-        }
+//        int[] numbers = {1,2,3,5,7,9,10,11};
+//        List<Stack<Integer>> list = new ArrayList<>();
+//        Stack<Integer> q = new Stack<>();
+//        list.add(q);
+//        for (int n:numbers) {
+//            if(q.size()==0){
+//                q.push(n);
+//            }else{
+//                if(n-1 != list.get(list.size()-1).peek()){
+//                    Stack<Integer> q1 = new Stack();
+//                    q1.push(n);
+//                    list.add(q1);
+//                }else{
+//                    list.get(list.size()-1).push(n);
+//                }
+//            }
+//        }
+//        for (Stack<Integer> s:list) {
+//            System.out.println("-----------------");
+//            for (Integer i:s){
+//                System.out.print(" "+i);
+//            }
+//        }
+
     }
 }

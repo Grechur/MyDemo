@@ -2,7 +2,6 @@ package com.clock.zc.mydemo.http.upload;
 
 import java.io.IOException;
 
-import javax.annotation.Nullable;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -31,7 +30,6 @@ public class UpMultipartBody extends RequestBody{
         this.mRequestBody = requestBody;
         this.mListener = listener;
     }
-    @Nullable
     @Override
     public MediaType contentType() {
         return mRequestBody.contentType();

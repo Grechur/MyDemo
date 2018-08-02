@@ -5,6 +5,9 @@ package com.example.designpattern.factory;
  */
 
 public class Coke extends Drink {
+    public Coke(){
+
+    }
     @Override
     String getInstantPackage() {
         return "速溶可乐粉";

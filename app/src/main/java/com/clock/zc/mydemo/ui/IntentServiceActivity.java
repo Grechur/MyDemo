@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 import com.clock.zc.mydemo.R;
 
+import java.util.LinkedHashMap;
+import java.util.concurrent.ConcurrentHashMap;
+
 import static com.clock.zc.mydemo.ui.TestIntentService.EXTRA_IMG_PATH;
 
 

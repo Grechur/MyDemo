@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.clock.zc.mydemo.Book;
 import com.clock.zc.mydemo.BookManager;
 import com.clock.zc.mydemo.R;
