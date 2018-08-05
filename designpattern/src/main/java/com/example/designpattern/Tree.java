@@ -47,9 +47,11 @@ public class Tree {
 //        int[] nums = {-10,-3,0,5,9};
 //        System.out.println(sortedArrayToBST(nums));
 
+
         String  s= "acbdsacdacds";
         String str = s.replace("ac","bc");
         System.out.println(str);
+        //查找字串的位置
         Pattern pattern = Pattern.compile("ac");
         Matcher matcher = pattern.matcher(s);
         while (matcher.find()){
@@ -59,6 +61,12 @@ public class Tree {
 
     }
 
+
+    /**
+     * 二叉树的深度
+     * @param root
+     * @return
+     */
     public static int maxDepth(TreeNode root) {
         if(root==null){
             return 0;
@@ -68,6 +76,11 @@ public class Tree {
         return left>right?left+1:right+1;
     }
 
+    /**
+     * 判断二叉树是否为BST树
+     * @param root
+     * @return
+     */
     public static boolean isValidBST(TreeNode root) {
         if (root == null) return true;
         return valid(root, Long.MIN_VALUE, Long.MAX_VALUE);
@@ -79,6 +92,11 @@ public class Tree {
         return valid(root.left, low, root.val) && valid(root.right, root.val, high);
     }
 
+    /**
+     *二叉树每层的数据的集合
+     * @param root
+     * @return
+     */
     public static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> lists = new ArrayList<>();
         if(root == null ) return lists;
@@ -99,6 +117,11 @@ public class Tree {
     }
 
 
+    /**
+     * 数组变为BST树
+     * @param nums
+     * @return
+     */
     public static TreeNode sortedArrayToBST(int[] nums) {
         if(nums == null || nums.length == 0)
             return null;
