@@ -62,7 +62,7 @@ public class MainTest {
 //        XiaoZhang xiaoZhang = new XiaoZhang();
 //        Form form2 = xiaoZhang.submitReport();
 //        System.out.println(form2);
-        Coke coke = new Coke();
+//        Coke coke = new Coke();
 //
 //        Coke coke1 = new Coke();
 //        System.out.println("使用==:"+(coke == coke1));
@@ -105,6 +105,38 @@ public class MainTest {
 //                System.out.print(" "+i);
 //            }
 //        }
-
+        int[] nums = {4,7,2,2,1,9,0};
+        int low = 0;
+        int high = nums.length-1;
+        quickSort(nums,low,high);
+        for (int num : nums) {
+            System.out.println(num);
+        }
     }
+
+
+    public static void quickSort(int[] nums,int low,int high){
+        if(low<high){
+            int middle = quickPass(nums,low,high);
+            quickSort(nums,low,middle-1);
+            quickSort(nums,middle+1,high);
+        }
+    }
+
+    private static int quickPass(int[] nums, int low, int high) {
+        int temp = nums[low];
+        while (low<high){
+            while (low<high&&nums[high]>temp){
+                high -- ;
+            }
+            nums[low] = nums[high];
+            while (low<high&&nums[low]<temp){
+                low++;
+            }
+            nums[high] = nums[low];
+        }
+        nums[low] = temp;
+        return low;
+    }
+
 }

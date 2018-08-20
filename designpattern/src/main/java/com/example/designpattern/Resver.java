@@ -46,7 +46,7 @@ public class Resver {
 //        }
 
 
-        int[] nums = {4,7,2,1,9,0};
+        int[] nums = {4,7,2,2,1,9,0};
         int low = 0;
         int high = nums.length-1;
         quickSort(nums,low,high);
@@ -66,9 +66,9 @@ public class Resver {
     private static int quickPass(int[] nums, int low, int high) {
         int temp = nums[low];
         while (low<high){
-            while (low<high&&nums[high]>temp) {high--;}
+            while (low<high&&nums[high]>=temp) {high--;}
             nums[low] = nums[high];
-            while (low<high&&nums[low]<temp) {low++;}
+            while (low<high&&nums[low]<=temp) {low++;}
             nums[high] = nums[low];
         }
         nums[low] = temp;

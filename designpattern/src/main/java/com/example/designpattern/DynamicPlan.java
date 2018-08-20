@@ -1,6 +1,8 @@
 package com.example.designpattern;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Created by zz on 2018/7/16.
@@ -17,29 +19,55 @@ public class DynamicPlan {
 //            }
 //        }
 //        System.out.println(result);
-        int[] nums1 = new int[]{4,5,6,0,0,0};
-        int[] nums2 = new int[]{1,2,3};
-        merge(nums1,3,nums2,3);
-        for (int i : nums1) {
-            System.out.println(i);
-        }
+//        int[] nums1 = new int[]{4,5,6,0,0,0};
+//        int[] nums2 = new int[]{1,2,3};
+//        merge(nums1,3,nums2,3);
+//        for (int i : nums1) {
+//            System.out.println(i);
+//        }
+//        List<String> s = fizzBuzz(15);
+//        for (int i = 0; i < s.size(); i++) {
+//            System.out.println(s.get(i));
+//        }
 
+        isPowerOfThree(9);
     }
 
     //走楼梯问题(一次只能走一阶或者2阶)
     public static int Stairs(int n){
-        if(n<=0) return 0;
-        if(n == 1) return 1;
-        if(n == 2) return 2;
-        int a = 1;
-        int b = 2;
-        int temp = 0;
-        for (int i = 3; i <= n; i++) {
-            temp = a+b;
-            a = b;
-            b = temp;
+//        if(n<=0) return 0;
+//        if(n == 1) return 1;
+//        if(n == 2) return 2;
+//        int a = 1;
+//        int b = 2;
+//        int temp = 0;
+//        for (int i = 3; i <= n; i++) {
+//            temp = a+b;
+//            a = b;
+//            b = temp;
+//        }
+
+        if (n == 0)
+            return 1;
+        int[] array = new int[n + 1];
+        array[0] = 1;
+        array[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            array[i] = array[i - 1] + array[i - 2];
         }
-        return temp;
+        return array[n];
+    }
+
+    public static int feibo(int n){
+        if(n==0) return 1;
+        if(n==1) return 1;
+        int[] array = new int[n+1];
+        array[0] = 1;
+        array[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            array[i] = array[i-1]+array[i-2];
+        }
+        return array[n];
     }
 
     //求n约数的个数
@@ -110,5 +138,28 @@ public class DynamicPlan {
             nums1[writeIdx--] = nums1[i] > nums2[j]? nums1[i--] : nums2[j--];
         while (j >= 0)
             nums1[writeIdx--] = nums2[j--];
+    }
+
+
+    public static List<String> fizzBuzz(int n) {
+        List<String> array = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            if(i%3!=0&&i%5!=0){
+                array.add(i+"");
+            }else if(i%3==0&&i%5!=0){
+                array.add("Fizz");
+            }else if(i%3!=0&&i%5==0){
+                array.add("Buzz");
+            }else if(i%3==0&&i%5==0){
+                array.add("FizzBuzz");
+            }
+        }
+        return array;
+    }
+
+    public static boolean isPowerOfThree(int n) {
+        double tem = Math.log10(n) / Math.log10(3);
+        System.out.println(tem);
+        return (tem - (int)(tem)) == 0?true:false;
     }
 }
