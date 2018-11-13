@@ -1,4 +1,4 @@
-package com.example.designpattern;
+package com.example.designpattern.leetCode;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,9 +13,9 @@ public class Atoi {
 //        char i = '9';
 //        char s = '5';
 //        System.out.println((i-s));
-//        String str = " -15936548658561 ";
-//        System.out.println(myAtoi(str));
-//        System.out.println(countAndSay(6));
+        String str = " -15936548658561 ";
+        System.out.println(myAtoi(str));
+        System.out.println(countAndSay(6));
 //        String s = "anagramo", t = "nagaramp";
 //        System.out.println(isAnagram(s,t));
 //        System.out.println(isAnagram1(s,t));[-1,-2,-3,-4,-5]
@@ -26,13 +26,15 @@ public class Atoi {
 //        }
 //        int[] nums = {0,1,0,3,12};
 //        moveZeroes(nums);
-        int[] nums1 = {1, 2, 2, 1}, nums2 = {2, 2,0};
-        for (int i : intersect(nums1, nums2)) {
-            System.out.println(i);
-        }
+//        int[] nums1 = {1, 2, 2, 1}, nums2 = {2, 2,0};
+//        for (int i : intersect(nums1, nums2)) {
+//            System.out.println(i);
+//        }
 
     }
-
+    /**
+     * 字符串转整数
+     */
     public static int myAtoi(String str) {
         if (str.trim().isEmpty()) return 0;
         int sign = 1, base = 0, i = 0, n = str.length();
@@ -78,6 +80,12 @@ public class Atoi {
     }
 
 
+    /**
+     * 有效的字母异位词
+     * @param s
+     * @param t
+     * @return
+     */
     public static boolean isAnagram(String s, String t) {
         long startTime = System.currentTimeMillis();
         if(s.length() != t.length())

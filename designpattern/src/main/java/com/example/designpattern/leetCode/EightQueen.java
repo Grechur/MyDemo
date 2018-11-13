@@ -1,4 +1,4 @@
-package com.example.designpattern;
+package com.example.designpattern.leetCode;
 
 /**
  * Created by zz on 2018/7/16.

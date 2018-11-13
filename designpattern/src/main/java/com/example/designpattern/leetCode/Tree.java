@@ -1,4 +1,4 @@
-package com.example.designpattern;
+package com.example.designpattern.leetCode;
 
 import java.util.ArrayList;
 import java.util.List;
