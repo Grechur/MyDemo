@@ -23,6 +23,13 @@ public class Array {
         System.out.println("----------------只出现一次的数字--------------");
         int[] doubles = {4,1,2,1,2};
         System.out.println(singleNumber(doubles));
+        System.out.println("----------------两个数组的交集 II--------------");
+        int[] nums1 = {4,9,5}, nums2 = {9,4,9,8,4};
+        int num[] =intersect(nums1,nums2);
+        for (int i : num) {
+            System.out.print(i+" ");
+        }
+        System.out.println("");
     }
 
     /**
@@ -113,4 +120,39 @@ public class Array {
         }
         return result;
     }
+
+    /**
+     * 两个数组的交集 II
+     * 思路：首先通过最小数组来确定接收数组的大小，给两个数组排序后，从第一个数字遍历，
+     * 相等时同时移动下标，避免出现重复数字
+     * 不等时，数值小的移动下标，在比较
+     */
+    public static int[] intersect(int[] nums1, int[] nums2) {
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        if(len1 == 0||len2 == 0) return new int[]{};
+        int len = len1>len2?len2:len1;
+        int[] num = new int[len];
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int k = 0;
+        int current1,current2;
+        for (int i= 0,j=0;i<len1&&j<len2;){
+            current1 = nums1[i];
+            current2 = nums2[j];
+            if(current1 == current2){
+                num[k] = current1;
+                k += 1;
+                i += 1;
+                j += 1;
+            }else if(current1<current2){
+                i += 1;
+            }else{
+                j += 1;
+            }
+        }
+
+        return Arrays.copyOfRange(num, 0, k);
+    }
+
 }

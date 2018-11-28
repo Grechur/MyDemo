@@ -2,6 +2,7 @@ package com.clock.zc.mydemo.ui.fragement;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -18,6 +19,11 @@ import android.widget.Toast;
 
 import com.clock.zc.mydemo.R;
 import com.clock.zc.mydemo.adapter.ZoomRecycleAdapter;
+import com.clock.zc.mydemo.ui.ImageActivity;
+import com.clock.zc.mydemo.utils.glide.GlideCircleTransform;
+import com.clock.zc.mydemo.utils.glide.GlideImageLoaderStrategy;
+import com.clock.zc.mydemo.utils.glide.ImageConfigImpl;
+import com.clock.zc.mydemo.utils.glide.ImageLoader;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
@@ -42,7 +48,6 @@ public class BannerFragment  extends Fragment {
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
-
     private Unbinder unbinder;
     private ArrayList<String> mDatas;
     private ZoomRecycleAdapter mAdapter;
@@ -51,7 +56,6 @@ public class BannerFragment  extends Fragment {
             R.mipmap.image1,R.mipmap.image2,R.mipmap.image3,R.mipmap.image4,R.mipmap.image5
     };
     private MZBannerView mMZBanner;
-
 
 
     @SuppressLint("ResourceType")
@@ -82,6 +86,8 @@ public class BannerFragment  extends Fragment {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
                 DividerItemDecoration.VERTICAL));
 
+
+
         return view;
     }
     public static class BannerViewHolder implements MZViewHolder<Integer> {
@@ -102,7 +108,7 @@ public class BannerFragment  extends Fragment {
     }
     @OnClick({R.id.txt_content})
     void loadApk(View view){
-
+        startActivity(new Intent(getActivity(), ImageActivity.class));
     }
     @Override
     public void onDestroyView() {
@@ -114,6 +120,7 @@ public class BannerFragment  extends Fragment {
     public void onResume() {
         super.onResume();
         mMZBanner.start();
+
     }
 
     @Override

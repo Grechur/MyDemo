@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <!-- Tell the system this app requires OpenGL ES 2.0. -->
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -65,7 +65,8 @@
         <!-- android:name=".ui.TestIntentService" -->
         <!-- android:exported="false" /> -->
         <activity android:name=".ui.IntentServiceActivity" />
-        <activity android:name=".ui.WaterMarkActivity"></activity>
+        <activity android:name=".ui.WaterMarkActivity" />
+        <activity android:name=".ui.ImageActivity"></activity>
     </application>
 
 </manifest>

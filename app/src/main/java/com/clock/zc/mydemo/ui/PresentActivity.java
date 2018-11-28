@@ -8,10 +8,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
 import com.clock.zc.mydemo.R;
 import com.clock.zc.mydemo.base.BaseActivity;
 
@@ -32,11 +28,10 @@ public class PresentActivity extends BaseActivity {
     }
 
     public void loadImage(View view) {
-        String url = "http://www.zhlzw.com/UploadFiles/Article_UploadFiles/201204/20120412123914329.jpg";http://p1.pstatp.com/large/166200019850062839d3
+        String url = "http://www.zhlzw.com/UploadFiles/Article_UploadFiles/201204/20120412123914329.jpg";
 
         Glide.with(this)
                 .load(url)
-                .transition(DrawableTransitionOptions.withCrossFade())
                 .thumbnail(0.6f)
                 .into(imageView);
 
