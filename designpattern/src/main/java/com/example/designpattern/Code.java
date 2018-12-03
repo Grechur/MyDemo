@@ -27,4 +27,13 @@ public class Code implements Comparable<Code>{
             return 0;
         }
     }
+
+    public static void main(String[] args) {
+        String s = "1";
+        boolean a = Boolean.valueOf(s);
+        System.out.println(a);
+        String s1 = "true";
+        boolean b = Boolean.valueOf(s1);
+        System.out.println(b);
+    }
 }
