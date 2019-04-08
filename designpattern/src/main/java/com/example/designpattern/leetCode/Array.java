@@ -154,5 +154,10 @@ public class Array {
 
         return Arrays.copyOfRange(num, 0, k);
     }
+    public static boolean isValidSudoku(char[][] board) {
+        for (int i = 0; i < 9; i++) {
 
+        }
+        return true;
+    }
 }

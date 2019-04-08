@@ -3,6 +3,9 @@ package com.clock.zc.mydemo.ui.fragement;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -56,6 +59,7 @@ public class BannerFragment  extends Fragment {
             R.mipmap.image1,R.mipmap.image2,R.mipmap.image3,R.mipmap.image4,R.mipmap.image5
     };
     private MZBannerView mMZBanner;
+    private SoundPool mSoundPool;
 
 
     @SuppressLint("ResourceType")
@@ -87,8 +91,31 @@ public class BannerFragment  extends Fragment {
                 DividerItemDecoration.VERTICAL));
 
 
-
+        createSoundPoolIfNeeded();
         return view;
+    }
+
+    /**
+     * 创建SoundPool ，注意 api 等级
+     */
+    private void createSoundPoolIfNeeded(){
+        if (mSoundPool == null) {
+            // 5.0 及 之后
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                AudioAttributes audioAttributes = null;
+                audioAttributes = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build();
+
+                mSoundPool = new SoundPool.Builder()
+                        .setMaxStreams(1)
+                        .setAudioAttributes(audioAttributes)
+                        .build();
+            } else { // 5.0 以前
+                mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);  // 创建SoundPool
+            }
+        }
     }
     public static class BannerViewHolder implements MZViewHolder<Integer> {
         private ImageView mImageView;
@@ -108,7 +135,17 @@ public class BannerFragment  extends Fragment {
     }
     @OnClick({R.id.txt_content})
     void loadApk(View view){
-        startActivity(new Intent(getActivity(), ImageActivity.class));
+//        startActivity(new Intent(getActivity(), ImageActivity.class));
+        if(mSoundPool != null){
+            int id = mSoundPool.load(getActivity(),R.raw.push,5);
+            mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                @Override
+                public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                    mSoundPool.play(id,1, 1, 0,0,1);
+                }
+            });
+        }
+
     }
     @Override
     public void onDestroyView() {
@@ -128,6 +165,10 @@ public class BannerFragment  extends Fragment {
         super.onPause();
         mMZBanner.pause();//暂停轮播
         mMZBanner.destroyDrawingCache();
+        if(mSoundPool!=null){
+            mSoundPool.release();
+            mSoundPool = null;
+        }
     }
 
     protected void initData()

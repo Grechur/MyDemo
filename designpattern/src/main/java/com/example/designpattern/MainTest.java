@@ -105,13 +105,29 @@ public class MainTest {
 //                System.out.print(" "+i);
 //            }
 //        }
-        int[] nums = {4,7,2,2,1,9,0};
-        int low = 0;
-        int high = nums.length-1;
-        quickSort(nums,low,high);
-        for (int num : nums) {
-            System.out.println(num);
-        }
+//        int[] nums = {4,7,2,2,1,9,0};
+//        int low = 0;
+//        int high = nums.length-1;
+//        quickSort(nums,low,high);
+//        for (int num : nums) {
+//            System.out.println(num);
+//        }
+        int a = 1;
+        int b = -1;
+        int c = a<<1;
+        int d = a>>1;
+        int e = b<<1;
+        int f = b>>1;
+        int g = b>>>1;
+        int h = a<<33;
+        int i = b<<33;
+        System.out.println("a<<1:"+c);
+        System.out.println("a>>1:"+d);
+        System.out.println("b<<1:"+e);
+        System.out.println("b>>1:"+f);
+        System.out.println("b>>>1:"+g);
+        System.out.println("a<<33:"+h);
+        System.out.println("b<<33:"+i);
     }
 
 
