@@ -1,5 +1,6 @@
 package com.clock.zc.mydemo.ui;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -25,8 +26,8 @@ public class UserCenterActivity extends BaseActivity {
     Toolbar toolbar;
     @BindView(R.id.title)
     TextView title;
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerview;
+//    @BindView(R.id.recyclerview)
+//    RecyclerView recyclerview;
     @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout collapsing_toolbar_layout;
     @Override
@@ -36,9 +37,9 @@ public class UserCenterActivity extends BaseActivity {
         ButterKnife.bind(this);
         toolbar.setBackgroundColor(Color.TRANSPARENT);
         toolbar.setNavigationIcon(R.mipmap.nav_btn_back_android);
-        recyclerview.setAdapter(new MyAdapter());
+//        recyclerview.setAdapter(new MyAdapter());
         //设置排列方式  上下文 排列方式 是否反转
-        recyclerview.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+//        recyclerview.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +47,12 @@ public class UserCenterActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+
+        try {
+            Class<? extends Activity> act = (Class<? extends Activity>) Class.forName("com.clock.zc.mydemo.ui.MainActivity");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

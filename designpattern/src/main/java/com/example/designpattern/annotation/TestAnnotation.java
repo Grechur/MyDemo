@@ -20,7 +20,7 @@ public class TestAnnotation {
 
         try {
             Class clazz = Class.forName("com.example.designpattern.annotation.Anno");
-            Method method = clazz.getMethod("desc",null);
+            Method method = clazz.getMethod("desc");
             Annotation[] fList = method.getDeclaredAnnotations();
             for (Annotation a:fList
                  ) {

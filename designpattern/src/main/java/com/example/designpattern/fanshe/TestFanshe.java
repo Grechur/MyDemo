@@ -27,7 +27,7 @@ public class TestFanshe {
         }
 
         System.out.println("*****************获取公有、无参的构造方法*******************************");
-        Constructor pConstructor = clazz.getConstructor(null);
+        Constructor pConstructor = clazz.getConstructor();
         //1>、因为是无参的构造方法所以类型是一个null,不写也可以：这里需要的是一个参数的类型，切记是类型
         //2>、返回的是描述这个无参构造函数的类对象。
         System.out.println(pConstructor);
@@ -43,14 +43,14 @@ public class TestFanshe {
         con.setAccessible(true);//暴力访问(忽略掉访问修饰符)
         object = con.newInstance('男');
         System.out.println("******************获取私有方法，并调用*******************************");
-        Method pMethod = clazz.getDeclaredMethod("add",null);
+        Method pMethod = clazz.getDeclaredMethod("add");
         System.out.println(pMethod);
         pMethod.setAccessible(true);//需要解除私有限定
-        pMethod.invoke(object,null);
+        pMethod.invoke(object);
         System.out.println("******************获取公有方法，并调用*******************************");
-        Method puMethod = clazz.getMethod("name",null);
+        Method puMethod = clazz.getMethod("name");
         object = clazz.getConstructor().newInstance();
-        Object result = puMethod.invoke(object,null);
+        Object result = puMethod.invoke(object);
         System.out.println(result);
 
         System.out.println("******************获取Student类的main方法，并调用*******************************");

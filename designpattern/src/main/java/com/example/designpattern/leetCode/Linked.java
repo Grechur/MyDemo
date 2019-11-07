@@ -63,20 +63,20 @@ public class Linked {
 //        System.out.println(mergeTwoLists(head,head2));
 //        System.out.println(isPalindrome(head));
 //        System.out.print(hasCycle(head));
-        ListNode head = new ListNode(2);
-        ListNode head2 = new ListNode(4);
-        ListNode head3 = new ListNode(3);
-        ListNode head4 = new ListNode(1);
+        ListNode head = new ListNode(1);
+        ListNode head2 = new ListNode(8);
+//        ListNode head3 = new ListNode(3);
+//        ListNode head4 = new ListNode(1);
         head.next = head2;
-        head2.next = head3;
-        head3.next = head4;
-        ListNode tow = new ListNode(5);
-        ListNode tow1 = new ListNode(6);
-        ListNode two2 = new ListNode(4);
-        ListNode two3 = new ListNode(9);
-        tow.next = tow1;
-        tow1.next = two2;
-        two2.next = two3;
+//        head2.next = head3;
+//        head3.next = head4;
+        ListNode tow = new ListNode(0);
+//        ListNode tow1 = new ListNode(6);
+//        ListNode two2 = new ListNode(4);
+//        ListNode two3 = new ListNode(9);
+//        tow.next = tow1;
+//        tow1.next = two2;
+//        two2.next = two3;
         System.out.println(addTwoNumbers(head,tow));
     }
 
@@ -199,121 +199,26 @@ public class Linked {
     }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode listNode ;
-        if(l1 ==null&&l2 == null) return null;
-        if(l1!=null&&l2 == null) return l1;
-        if(l1 == null&&l2!=null) return l2;
-        int temp = 0;
-        int head = l1.val+l2.val;
-        if(head>=10){
-            head = head%10;
-            temp = 1;
-        }
-        listNode = new ListNode(head);
-        ListNode listNode1 = l1.next;
-        ListNode listNode2 = l2.next;
-        ListNode listNode3 = listNode;
+       ListNode pre = new ListNode(0);
+       ListNode cur = pre;
+       int carry = 0;//用于保存前一次加法所产生的进制数
+       while (l1!=null||l2!=null){
+           int x = l1 == null ? 0 : l1.val;
+           int y = l2 == null ? 0 : l2.val;
 
-        while (listNode1!=null&&listNode2!=null){
-            int sum = listNode1.val+listNode2.val;
-            if(temp == 1) {
-                sum = sum+1;
-            }
-            if(sum>=10){
-                sum = sum%10;
-                temp = 1;
-            }else{
-                temp = 0;
-            }
-            listNode3.next = new ListNode(sum);
-            listNode1 = listNode1.next;
-            listNode2 = listNode2.next;
-            listNode3 = listNode3.next;
-        }
-        if(listNode1 == null&&listNode2!=null){
-            if(listNode2.next == null) {
-                if (temp == 1) {
-                    int end = listNode2.val + 1;
-                    if(end>=10){
-                        listNode3.next = new ListNode(0);
-                    }else{
-                        listNode3.next = new ListNode(end);
-                        temp = 0;
-                    }
-                } else {
-                    listNode3.next = new ListNode(listNode2.val);
-                }
-            }else{
-                while (listNode2 != null) {
-                    if (temp == 1) {
-                        int end = listNode2.val + 1;
-                        if(end>=10){
-                            listNode3.next = new ListNode(0);
-                        }else{
-                            listNode3.next = new ListNode(end);
-                            temp = 0;
-                        }
-                    } else {
-                        listNode3.next = new ListNode(listNode2.val);
-                        temp = 0;
-                    }
+           int sum = x+y+carry;//两个列表数据相加，以及上一个数据相加所产生的进数
+           carry = sum/10;//整除，大于10取1，小于10取0
+           sum = sum%10;//取余，留下的是当前节点所保留的数
+           cur.next = new ListNode(sum);//给下一个节点取值
 
-                    listNode2 = listNode2.next;
-                    listNode3 = listNode3.next;
-                }
-            }
-        }else if(listNode2 == null&&listNode1!=null){
-            if(listNode1.next == null) {
-                if (temp == 1) {
-                    int end = listNode1.val + 1;
-                    if(end>=10){
-                        listNode3.next = new ListNode(0);
-                    }else {
-                        listNode3.next = new ListNode(end);
-                        temp = 0;
-                    }
-                } else {
-                    listNode3.next = new ListNode(listNode1.val);
-                    temp = 0;
-                }
-            }else{
-                while (listNode1 != null) {
-                    if (temp == 1) {
-                        int end = listNode1.val + 1;
-                        if(end>=10){
-                            listNode3.next = new ListNode(0);
-                        }else {
-                            listNode3.next = new ListNode(end);
-                            temp = 0;
-                        }
-                    } else {
-                        listNode3.next = new ListNode(listNode1.val);
-                        temp = 0;
-                    }
-                    listNode1 = listNode1.next;
-                    listNode3 = listNode3.next;
-                }
-            }
-        }else if(listNode2 != null&&listNode1!=null){
-            int end = listNode1.val+listNode2.val;
-            if(temp == 1) {
-                end = end+1;
-            }
-            if(end>=10){
-                end = end%10;
-                temp = 1;
-            }else{
-                temp = 0;
-            }
-            listNode3.next = new ListNode(end);
-        }
-        if(temp == 1) {
-            if(listNode3.next == null){
-                listNode3.next = new ListNode(1);
-            }else {
-                listNode3.next.next = new ListNode(1);
-            }
-        }
-        return listNode;
+           cur = cur.next;//移动节点
+           if(l1!=null) l1 = l1.next;//移动节点
+           if(l2!=null) l2 = l2.next;//移动节点
+
+       }
+       if(carry == 1){//如果还有进数，新创建节点加上去
+           cur.next = new ListNode(carry);
+       }
+       return pre.next;//pre是从0开始的，要显示下一个节点才是正确的链表
     }
 }

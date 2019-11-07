@@ -3,8 +3,6 @@ package com.example.designpattern.thread;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-import sun.rmi.runtime.Log;
-
 /**
  * Created by Zc on 2018/3/15.
  */
