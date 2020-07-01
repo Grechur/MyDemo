@@ -140,5 +140,21 @@ public class Tree {
         }
     }
 
+    /**
+     * 二叉搜索树的范围和
+     * 大于某个数和小于某个数的和
+     */
+    public int rangeSumBST(TreeNode root, int L, int R) {
+        if(root == null) return 0;
+        int result = 0;
 
+        result += rangeSumBST(root.right,L,R);
+        result += rangeSumBST(root.left,L,R);
+
+        if(root.val>=L&&root.val<=R){
+            result += root.val;
+        }
+
+        return result;
+    }
 }

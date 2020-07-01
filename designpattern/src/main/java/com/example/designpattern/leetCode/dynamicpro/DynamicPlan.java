@@ -1,4 +1,4 @@
-package com.example.designpattern.leetCode;
+package com.example.designpattern.leetCode.dynamicpro;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -30,7 +30,7 @@ public class DynamicPlan {
 //            System.out.println(s.get(i));
 //        }
 
-        isPowerOfThree(9);
+//        isPowerOfThree(9);
     }
 
     //走楼梯问题(一次只能走一阶或者2阶)

@@ -65,11 +65,11 @@ public class Linked {
 //        System.out.print(hasCycle(head));
         ListNode head = new ListNode(1);
         ListNode head2 = new ListNode(8);
-//        ListNode head3 = new ListNode(3);
-//        ListNode head4 = new ListNode(1);
+        ListNode head3 = new ListNode(3);
+        ListNode head4 = new ListNode(1);
         head.next = head2;
-//        head2.next = head3;
-//        head3.next = head4;
+        head2.next = head3;
+        head3.next = head4;
         ListNode tow = new ListNode(0);
 //        ListNode tow1 = new ListNode(6);
 //        ListNode two2 = new ListNode(4);
@@ -221,4 +221,15 @@ public class Linked {
        }
        return pre.next;//pre是从0开始的，要显示下一个节点才是正确的链表
     }
+
+    /**
+     * 从链表里删除一个节点 node 的最常见方法是修改之前节点的 next 指针，使其指向之后的节点。
+     * 但是题目没有头节点，那么直接修改节点就行，相当于删除了后一个节点，放到这个节点上
+     * @param node
+     */
+    public static void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+
 }

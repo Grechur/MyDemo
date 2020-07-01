@@ -3,6 +3,9 @@
 buildscript {
 
     repositories {
+//        maven {
+//            url 'http://localhost:8081/artifactory/android_group/'
+//        }
         maven { url 'https://maven.google.com' }
         jcenter()
         mavenCentral()
@@ -21,6 +24,9 @@ buildscript {
 
 allprojects {
     repositories {
+//        maven {
+//            url 'http://localhost:8081/artifactory/android_group/'
+//        }
 //        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://maven.google.com' }
         jcenter()
@@ -40,4 +46,8 @@ ext {
     retrofitVersion = "2.3.0"
     okhttpVersion = "3.9.0"
     multiVersion = "1.0.0"
+
+    artifactoryUrl = 'http://localhost:8081/artifactory/android_local'
+    artifactoryUser = 'admin'
+    artifactoryPass = 'password'
 }
